@@ -1,0 +1,147 @@
+# Assignment 1 – Event Management Web Application
+
+## Overview
+Develop a **responsive web application** using **Vue.js 3** and **Bootstrap** that allows users to:
+- View and search event information
+- Register for events via a form
+
+The application **must be deployed to the university web server (Mercury)**.
+
+---
+
+## Technology Requirements
+- Vue.js 3
+- Bootstrap (local copy, not CDN)
+- Responsive design using Bootstrap Grid
+
+---
+
+## Website Structure
+The web application must consist of **three main sections**:
+
+1. Responsive Content
+2. Event Information (Searchable Table)
+3. Registration Form
+
+Design is flexible, but **all requirements must be met**.
+
+---
+
+## 1. Responsive Content Section
+
+### Mandatory Elements
+- Website title at the top
+- An image related to event management
+- A **"Why Choose Us?"** section containing **6 items**
+
+Each item must include:
+- Title
+- Short description
+- (Optional) Icon
+
+### Responsive Layout Requirements
+Use **Bootstrap Grid System** with the following breakpoints:
+
+| Screen Size | Layout |
+|------------|--------|
+| Small (Mobile) | 1 column |
+| Medium (Tablet) | 2 columns |
+| Large (Desktop) | 3 columns |
+
+---
+
+## 2. Event Information Section (Searchable Table)
+
+### Table Requirements
+- Load and display **all events from `events.txt` initially**
+- Table must include **4 columns**:
+  - Event ID
+  - Event Name
+  - Category
+  - Duration (Hours)
+
+### Filtering & Search
+Provide the following filters:
+- Text input to search by:
+  - Event ID
+  - Event Name
+  - Duration
+- Radio buttons to filter by **Category**:
+  - Technology
+  - Business
+  - Marketing
+  - Finance
+  - All
+
+Filtering should update the table dynamically.
+
+---
+
+## 3. Registration Form
+
+### Form Fields
+- Username input
+- Password input
+- Confirm password input  
+  - Display a message if passwords do not match
+- Radio buttons to select **event category**
+  - Default category: **Business**
+- Dropdown list of **event names**
+  - Must update dynamically based on selected category
+
+### Submission Output
+After selection, display a **summary message** showing:
+- Username
+- Selected category
+- Selected event name
+
+---
+
+## Folder Structure
+
+### Required Structure (if not using Vue CLI)
+framework/
+├── css/ # Bootstrap CSS
+├── js/ # Bootstrap JS + vue.global.js
+
+A1/
+A2/
+
+
+All framework files must be **stored locally** to avoid external dependency issues.
+
+> If using tools like Vue CLI, this structure is not mandatory.
+
+---
+
+## Deployment Requirements
+- Deploy the web app to **Mercury**
+- Follow the specified folder structure
+- Ensure all resources load correctly on the server
+
+---
+
+## Submission Requirements
+- Submit a **ZIP file** containing all source code to Canvas
+- Web app must be accessible on Mercury
+
+---
+
+## Marking Breakdown
+
+| Component | Marks |
+|---------|-------|
+| Responsive Design | 3 |
+| Searchable Table | 4 |
+| Registration Form | 4 |
+| Accessibility | 2 |
+| Mercury Deployment | 1 |
+| Overall Appearance | 1 |
+| **Total** | **15** |
+
+---
+
+## Notes
+- Custom design is encouraged
+- Accessibility requirements apply across all components
+- All functionality must work without external CDN dependencies

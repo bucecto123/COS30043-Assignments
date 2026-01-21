@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EventHub - Event Management</title>
+    <link rel="stylesheet" href="../framework/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="app" class="container py-4 py-lg-5">
+      <header class="mb-4">
+        <h1 class="display-5 fw-bold">EventHub – Event Management</h1>
+        <p class="text-muted mb-0">Discover, explore, and register for events that match your goals.</p>
+      </header>
+
+      <section class="hero p-4 p-lg-5 mb-5">
+        <div class="row align-items-center gy-4">
+          <div class="col-lg-6">
+            <h2 class="section-title mb-3">Bring your community together</h2>
+            <p class="mb-4">
+              Manage events seamlessly with curated experiences, real-time insights, and
+              personalized recommendations.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge text-bg-light text-dark">Trusted Speakers</span>
+              <span class="badge text-bg-light text-dark">Smart Scheduling</span>
+              <span class="badge text-bg-light text-dark">Secure Registration</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <img src="assets/event-hero.svg" alt="Event management illustration" class="img-fluid" />
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-3">Why Choose Us?</h2>
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <div class="card-icon mb-3">1</div>
+                <h3 class="h5">Curated Events</h3>
+                <p class="mb-0">Access high-quality events tailored to technology, business, finance, and marketing.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <div class="card-icon mb-3">2</div>
+                <h3 class="h5">Smart Discovery</h3>
+                <p class="mb-0">Use fast search and filtering to find the right event in seconds.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <div class="card-icon mb-3">3</div>
+                <h3 class="h5">Secure Registration</h3>
+                <p class="mb-0">Register confidently with password checks and clear confirmations.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <div class="card-icon mb-3">4</div>
+                <h3 class="h5">Live Insights</h3>
+                <p class="mb-0">Track durations, categories, and participation to optimize your schedule.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <div class="card-icon mb-3">5</div>
+                <h3 class="h5">Responsive Design</h3>
+                <p class="mb-0">Enjoy a seamless experience across mobile, tablet, and desktop screens.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <div class="card-icon mb-3">6</div>
+                <h3 class="h5">Dedicated Support</h3>
+                <p class="mb-0">Get help when you need it, with guidance built into the platform.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+          <div>
+            <h2 class="section-title mb-1">Event Information</h2>
+            <p class="text-muted mb-0">Search and filter events by ID, name, duration, or category.</p>
+          </div>
+          <div class="flex-grow-1 flex-lg-grow-0">
+            <label for="searchInput" class="form-label fw-semibold">Search events</label>
+            <input
+              id="searchInput"
+              v-model="searchText"
+              type="text"
+              class="form-control"
+              placeholder="Search by ID, name, or duration"
+              aria-describedby="searchHelp"
+            />
+            <div id="searchHelp" class="form-text">Search updates automatically as you type.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <span class="fw-semibold me-2">Category filter:</span>
+          <div class="btn-group" role="group" aria-label="Event category filter">
+            <input class="btn-check" type="radio" name="tableCategory" id="catAll" value="All" v-model="tableCategory" />
+            <label class="btn btn-outline-primary" for="catAll">All</label>
+
+            <input class="btn-check" type="radio" name="tableCategory" id="catTech" value="Technology" v-model="tableCategory" />
+            <label class="btn btn-outline-primary" for="catTech">Technology</label>
+
+            <input class="btn-check" type="radio" name="tableCategory" id="catBusiness" value="Business" v-model="tableCategory" />
+            <label class="btn btn-outline-primary" for="catBusiness">Business</label>
+
+            <input class="btn-check" type="radio" name="tableCategory" id="catMarketing" value="Marketing" v-model="tableCategory" />
+            <label class="btn btn-outline-primary" for="catMarketing">Marketing</label>
+
+            <input class="btn-check" type="radio" name="tableCategory" id="catFinance" value="Finance" v-model="tableCategory" />
+            <label class="btn btn-outline-primary" for="catFinance">Finance</label>
+          </div>
+        </div>
+
+        <div class="table-responsive shadow-sm rounded bg-white">
+          <table class="table table-striped align-middle mb-0">
+            <caption class="ps-3 pt-3 text-muted">Event list loaded from events.txt</caption>
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Event ID</th>
+                <th scope="col">Event Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Duration (Hours)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="event in filteredEvents" :key="event.eventid">
+                <td>{{ event.eventid }}</td>
+                <td>{{ event.eventname }}</td>
+                <td>{{ event.category }}</td>
+                <td>{{ event.durationhour }}</td>
+              </tr>
+              <tr v-if="filteredEvents.length === 0">
+                <td colspan="4" class="text-center text-muted">No events match your search.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p v-if="loadError" class="text-danger mt-2">{{ loadError }}</p>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-3">Registration Form</h2>
+        <form class="row g-3" @submit.prevent="handleSubmit">
+          <div class="col-12 col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input id="username" v-model="username" type="text" class="form-control" required />
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" v-model="password" type="password" class="form-control" required />
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              v-model="confirmPassword"
+              type="password"
+              class="form-control"
+              required
+              aria-describedby="passwordMatchHint"
+            />
+            <div id="passwordMatchHint" class="form-hint text-danger" v-if="passwordMismatch">
+              Passwords do not match.
+            </div>
+            <div class="form-hint text-success" v-else-if="password && confirmPassword">
+              Passwords match.
+            </div>
+          </div>
+          <div class="col-12">
+            <fieldset>
+              <legend class="col-form-label fw-semibold">Event Category</legend>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="form-check" v-for="category in categories" :key="category">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="regCategory"
+                    :id="`reg-${category}`"
+                    :value="category"
+                    v-model="regCategory"
+                  />
+                  <label class="form-check-label" :for="`reg-${category}`">{{ category }}</label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="eventSelect" class="form-label">Event Name</label>
+            <select id="eventSelect" v-model="regEventName" class="form-select" required>
+              <option v-for="event in eventsForRegistration" :key="event.eventid" :value="event.eventname">
+                {{ event.eventname }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+
+        <div v-if="submittedSummary" class="summary-box mt-4" role="status" aria-live="polite">
+          <h3 class="h5">Registration Summary</h3>
+          <p class="mb-1"><strong>Username:</strong> {{ submittedSummary.username }}</p>
+          <p class="mb-1"><strong>Selected Category:</strong> {{ submittedSummary.category }}</p>
+          <p class="mb-0"><strong>Selected Event:</strong> {{ submittedSummary.eventName }}</p>
+        </div>
+      </section>
+    </div>
+
+    <script src="../framework/js/vue.global.js"></script>
+    <script src="../framework/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
