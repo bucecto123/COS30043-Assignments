@@ -17,19 +17,19 @@
       <section class="hero p-4 p-lg-5 mb-5">
         <div class="row align-items-center gy-4">
           <div class="col-lg-6">
-            <h2 class="section-title mb-3">Bring your community together</h2>
+            <h2 class="section-title mb-3">Manage your events</h2>
             <p class="mb-4">
               Manage events seamlessly with curated experiences, real-time insights, and
               personalized recommendations.
             </p>
             <div class="d-flex flex-wrap gap-2">
-              <span class="badge text-bg-light text-dark">Trusted Speakers</span>
-              <span class="badge text-bg-light text-dark">Smart Scheduling</span>
-              <span class="badge text-bg-light text-dark">Secure Registration</span>
+              <span class="badge text-bg-light text-dark">Trusted Events</span>
+              <span class="badge text-bg-light text-dark">Smart Management</span>
+              <span class="badge text-bg-light text-dark">Event Management</span>
             </div>
           </div>
           <div class="col-lg-6">
-            <img src="assets/event-hero.svg" alt="Event management illustration" class="img-fluid" />
+            <img src="assets/event-management-banner.jpg" alt="Event management illustration" class="img-fluid" />
           </div>
         </div>
       </section>
@@ -95,23 +95,22 @@
       </section>
 
       <section class="mb-5">
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
-          <div>
-            <h2 class="section-title mb-1">Event Information</h2>
-            <p class="text-muted mb-0">Search and filter events by ID, name, duration, or category.</p>
-          </div>
-          <div class="flex-grow-1 flex-lg-grow-0">
-            <label for="searchInput" class="form-label fw-semibold">Search events</label>
-            <input
-              id="searchInput"
-              v-model="searchText"
-              type="text"
-              class="form-control"
-              placeholder="Search by ID, name, or duration"
-              aria-describedby="searchHelp"
-            />
-            <div id="searchHelp" class="form-text">Search updates automatically as you type.</div>
-          </div>
+        <div class="mb-3">
+          <h2 class="section-title mb-1">Event Information</h2>
+          <p class="text-muted mb-0">Search and filter events by ID, name, duration, or category.</p>
+        </div>
+
+        <div class="mb-3">
+          <label for="searchInput" class="form-label fw-semibold fs-4">Search events</label>
+          <input
+            id="searchInput"
+            v-model="searchText"
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Search by ID, name, or duration"
+            aria-describedby="searchHelp"
+          />
+          <div id="searchHelp" class="form-text">Search updates automatically as you type.</div>
         </div>
 
         <div class="mb-3">
@@ -136,7 +135,6 @@
 
         <div class="table-responsive shadow-sm rounded bg-white">
           <table class="table table-striped align-middle mb-0">
-            <caption class="ps-3 pt-3 text-muted">Event list loaded from events.txt</caption>
             <thead class="table-light">
               <tr>
                 <th scope="col">Event ID</th>
@@ -146,7 +144,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="event in filteredEvents" :key="event.eventid">
+              <tr v-for="event in paginatedEvents" :key="event.eventid">
                 <td>{{ event.eventid }}</td>
                 <td>{{ event.eventname }}</td>
                 <td>{{ event.category }}</td>
@@ -158,9 +156,36 @@
             </tbody>
           </table>
         </div>
+        <nav class="mt-3" aria-label="Event table pagination" v-if="totalPages > 1">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" :class="{ disabled: currentPage === 1 }">
+              <button class="page-link" type="button" @click="currentPage = 1" :disabled="currentPage === 1">
+                First
+              </button>
+            </li>
+            <li class="page-item" :class="{ disabled: currentPage === 1 }">
+              <button class="page-link" type="button" @click="currentPage -= 1" :disabled="currentPage === 1">
+                Previous
+              </button>
+            </li>
+            <li class="page-item disabled">
+              <span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span>
+            </li>
+            <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+              <button class="page-link" type="button" @click="currentPage += 1" :disabled="currentPage === totalPages">
+                Next
+              </button>
+            </li>
+            <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+              <button class="page-link" type="button" @click="currentPage = totalPages" :disabled="currentPage === totalPages">
+                Last
+              </button>
+            </li>
+          </ul>
+        </nav>
         <p v-if="loadError" class="text-danger mt-2">{{ loadError }}</p>
       </section>
-
+      <hr>
       <section class="mb-5">
         <h2 class="section-title mb-3">Registration Form</h2>
         <form class="row g-3" @submit.prevent="handleSubmit">
@@ -231,6 +256,109 @@
 
     <script src="../framework/js/vue.global.js"></script>
     <script src="../framework/js/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            events: [
+              { eventid: "EVT10001", eventname: "Tech Innovations Conference", category: "Technology", durationhour: 8 },
+              { eventid: "EVT10002", eventname: "Startup Pitch Day", category: "Business", durationhour: 6 },
+              { eventid: "EVT10003", eventname: "AI & Machine Learning Summit", category: "Technology", durationhour: 10 },
+              { eventid: "EVT10004", eventname: "Cybersecurity Workshop", category: "Technology", durationhour: 4 },
+              { eventid: "EVT10005", eventname: "Digital Marketing Bootcamp", category: "Marketing", durationhour: 6 },
+              { eventid: "EVT10006", eventname: "Blockchain and Cryptocurrency", category: "Finance", durationhour: 5 },
+              { eventid: "EVT10007", eventname: "Entrepreneurship Forum", category: "Business", durationhour: 7 },
+              { eventid: "EVT10008", eventname: "Data Science Hackathon", category: "Technology", durationhour: 12 },
+              { eventid: "EVT10009", eventname: "Leadership and Management Summit", category: "Business", durationhour: 9 },
+              { eventid: "EVT10010", eventname: "E-commerce Strategies", category: "Marketing", durationhour: 6 },
+              { eventid: "EVT10011", eventname: "AI for Business", category: "Business", durationhour: 8 },
+              { eventid: "EVT10012", eventname: "IoT & Smart Devices Expo", category: "Technology", durationhour: 7 },
+              { eventid: "EVT10013", eventname: "Brand Strategy and Growth", category: "Marketing", durationhour: 5 },
+              { eventid: "EVT10014", eventname: "Investment and Wealth Management", category: "Finance", durationhour: 6 },
+              { eventid: "EVT10015", eventname: "Financial Technology (FinTech) Summit", category: "Finance", durationhour: 8 },
+              { eventid: "EVT10016", eventname: "AI Ethics and Regulations", category: "Technology", durationhour: 4 },
+              { eventid: "EVT10017", eventname: "Business Analytics Workshop", category: "Business", durationhour: 6 },
+              { eventid: "EVT10018", eventname: "SEO and Content Marketing", category: "Marketing", durationhour: 7 },
+              { eventid: "EVT10019", eventname: "Cryptocurrency Investment Strategies", category: "Finance", durationhour: 9 },
+              { eventid: "EVT10020", eventname: "Social Media Marketing Trends", category: "Marketing", durationhour: 5 }
+            ],
+            searchText: "",
+            tableCategory: "All",
+            categories: ["Technology", "Business", "Marketing", "Finance"],
+            currentPage: 1,
+            pageSize: 6,
+            username: "",
+            password: "",
+            confirmPassword: "",
+            regCategory: "Business",
+            regEventName: "",
+            submittedSummary: null
+          };
+        },
+        computed: {
+          filteredEvents() {
+            const query = this.searchText.trim().toLowerCase();
+            return this.events.filter((event) => {
+              const matchesCategory =
+                this.tableCategory === "All" || event.category === this.tableCategory;
+
+              const matchesQuery =
+                !query ||
+                event.eventid.toLowerCase().includes(query) ||
+                event.eventname.toLowerCase().includes(query) ||
+                String(event.durationhour).includes(query);
+
+              return matchesCategory && matchesQuery;
+            });
+          },
+          totalPages() {
+            return Math.max(1, Math.ceil(this.filteredEvents.length / this.pageSize));
+          },
+          paginatedEvents() {
+            const start = (this.currentPage - 1) * this.pageSize;
+            return this.filteredEvents.slice(start, start + this.pageSize);
+          },
+          passwordMismatch() {
+            return (
+              this.password.length > 0 &&
+              this.confirmPassword.length > 0 &&
+              this.password !== this.confirmPassword
+            );
+          },
+          eventsForRegistration() {
+            return this.events.filter((event) => event.category === this.regCategory);
+          }
+        },
+        watch: {
+          regCategory() {
+            const list = this.eventsForRegistration;
+            this.regEventName = list.length > 0 ? list[0].eventname : "";
+          },
+          filteredEvents() {
+            this.currentPage = 1;
+          }
+        },
+        methods: {
+          handleSubmit() {
+            if (this.passwordMismatch) {
+              this.submittedSummary = null;
+              return;
+            }
+            this.submittedSummary = {
+              username: this.username.trim(),
+              category: this.regCategory,
+              eventName: this.regEventName
+            };
+          }
+        },
+        mounted() {
+          if (!this.regEventName && this.eventsForRegistration.length > 0) {
+            this.regEventName = this.eventsForRegistration[0].eventname;
+          }
+        }
+      }).mount("#app");
+    </script>
   </body>
 </html>
