@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EventHub - Event Management</title>
-    <link rel="stylesheet" href="../framework/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./framework/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -34,7 +34,7 @@
         </div>
       </section>
 
-      <section class="mb-5">
+      <section class="mb-5 content-panel">
         <h2 class="section-title mb-3">Why Choose Us?</h2>
         <div class="row g-3">
           <div class="col-12 col-md-6 col-lg-4">
@@ -94,7 +94,7 @@
         </div>
       </section>
 
-      <section class="mb-5">
+      <section class="mb-5 content-panel">
         <div class="mb-3">
           <h2 class="section-title mb-1">Event Information</h2>
           <p class="text-muted mb-0">Search and filter events by ID, name, duration, or category.</p>
@@ -185,8 +185,7 @@
         </nav>
         <p v-if="loadError" class="text-danger mt-2">{{ loadError }}</p>
       </section>
-      <hr>
-      <section class="mb-5">
+      <section class="mb-5 content-panel">
         <h2 class="section-title mb-3">Registration Form</h2>
         <form class="row g-3" @submit.prevent="handleSubmit">
           <div class="col-12 col-md-6">
@@ -254,8 +253,8 @@
       </section>
     </div>
 
-    <script src="../framework/js/vue.global.js"></script>
-    <script src="../framework/js/bootstrap.min.js"></script>
+    <script src="./framework/js/vue.global.js"></script>
+    <script src="./framework/js/bootstrap.min.js"></script>
     <script>
       const { createApp } = Vue;
 

@@ -4,13 +4,24 @@
 
 body {
   background-color: #f8f9fa;
+  background-image: radial-gradient(circle at top left, rgba(13, 110, 253, 0.08), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(111, 66, 193, 0.08), transparent 50%);
+}
+
+.content-panel {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
 }
 
 .hero {
-  background: var(--brand-gradient);
+  background: linear-gradient(135deg, #0d6efd 0%, #6f42c1 55%, #20c997 100%);
   border-radius: 1.5rem;
   color: #fff;
   overflow: hidden;
+  box-shadow: 0 16px 30px rgba(13, 110, 253, 0.25);
 }
 
 .hero img {
@@ -35,8 +46,27 @@ body {
   font-weight: 700;
 }
 
+.card {
+  border: none;
+  border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(13, 110, 253, 0.15);
+}
+
 .table thead th {
   white-space: nowrap;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.06);
 }
 
 .form-hint {
@@ -48,6 +78,21 @@ body {
   border: 1px solid #e9ecef;
   border-radius: 1rem;
   padding: 1rem 1.25rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary {
+  background: var(--brand-gradient);
+  border: none;
+  box-shadow: 0 8px 16px rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.pagination .page-link {
+  border-radius: 999px;
 }
 
 @media (max-width: 576px) {
